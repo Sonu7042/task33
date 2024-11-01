@@ -11,9 +11,7 @@ const app = express();
 app.use(express.json());
 
 app.use(cors({
-  origin: "https://task33-ne7m.vercel.app",
-  credentials:true,
-  
+  credentials:true, 
 }))
    
 
