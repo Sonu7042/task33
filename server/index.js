@@ -2,7 +2,7 @@ const express = require("express");
 const jwt = require("jsonwebtoken");
 const cors = require("cors");
 const protectRoute = require("./middleware/protectRoute");
-const cookieParser = require("cookie-parser")
+const cookieParser = require("cookie-parser");
 
 const secretKey = "computer12345";
 
@@ -11,24 +11,25 @@ const app = express();
 app.use(express.json());
 
 app.use(cors({
-  origin: "http://localhost:5173", 
-  credentials: true 
-}));
+  origin: "https://task33-ne7m.vercel.app",
+  credentials:true,
+  
+}))
+   
 
 
 
-app.use(cookieParser())
+
+app.use(cookieParser());
 
 const users = [];
-
-
 
 app.post("/register", (req, res) => {
   try {
     const user = req.body;
     const { username, password } = user;
 
-    if (!username && !password) {
+    if (!username || !password) {
       throw new Error("Pls enter user");
     }
 
@@ -45,7 +46,6 @@ app.post("/register", (req, res) => {
       error: false,
       User: user,
     });
-
   } catch (err) {
     res.status(400).json({
       message: err.message || err,
@@ -54,7 +54,6 @@ app.post("/register", (req, res) => {
     });
   }
 });
-
 
 app.post("/login", (req, res) => {
   try {
@@ -68,17 +67,18 @@ app.post("/login", (req, res) => {
     }
 
     const token = jwt.sign({ user }, secretKey, { expiresIn: "1h" });
-    res.cookie("token",token, {httpOnly:false, secure: true, sameSite:'none'})
 
+    res.cookie("token", token, {
+      httpOnly: false,
+      secure: true,
+      sameSite: "none",
+    });
 
-    
     res.status(200).json({
       success: true,
       error: false,
       message: "user logged in successfully",
     });
-
-
   } catch (err) {
     res.status(400).json({
       message: err.message || err,
@@ -87,7 +87,6 @@ app.post("/login", (req, res) => {
     });
   }
 });
-
 
 app.get("/", protectRoute, (req, res) => {
   res.send(users);
