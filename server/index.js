@@ -11,12 +11,9 @@ const app = express();
 app.use(express.json());
 
 app.use(cors({
-  credentials:true, 
-}))
-   
-
-
-
+  origin: "https://task33-ne7m.vercel.app", 
+  credentials: true, 
+}));
 
 app.use(cookieParser());
 
@@ -28,7 +25,7 @@ app.post("/register", (req, res) => {
     const { username, password } = user;
 
     if (!username || !password) {
-      throw new Error("Pls enter user");
+      throw new Error("Please enter username and password");
     }
 
     const alreadyFind = users.find((value) => value.username === user.username);
@@ -39,7 +36,7 @@ app.post("/register", (req, res) => {
     users.push(user);
 
     res.status(201).json({
-      message: "User  created successfully",
+      message: "User created successfully",
       success: true,
       error: false,
       User: user,
@@ -61,21 +58,21 @@ app.post("/login", (req, res) => {
         value.username === user.username && value.password === user.password
     );
     if (!alreadyFind) {
-      throw new Error("Pls first register");
+      throw new Error("Please register first");
     }
 
     const token = jwt.sign({ user }, secretKey, { expiresIn: "1h" });
 
     res.cookie("token", token, {
-      httpOnly: false,
-      secure: true,
-      sameSite: "none",
+      httpOnly: true,     
+      secure: true,      
+      sameSite: "none",  
     });
 
     res.status(200).json({
       success: true,
       error: false,
-      message: "user logged in successfully",
+      message: "User logged in successfully",
     });
   } catch (err) {
     res.status(400).json({
