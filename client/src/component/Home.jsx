@@ -10,8 +10,9 @@ const Home = () => {
   const [user, setUser] = useState([]);
   const navigate= useNavigate()
 
-  const token = Cookies.get("token");
-console.log("Token from cookies:", vercel-feature-flags);
+  
+  const vercel_token =  Cookies.get("vercel-feature-flags")
+  console.log("vercel token from cookies:", vercel_token);
 
     useEffect(()=>{
       if(!Cookies.get("token")){
