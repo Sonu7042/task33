@@ -66,7 +66,7 @@ app.post("/login", (req, res) => {
     const token = jwt.sign({ user }, secretKey, { expiresIn: "1h" });
     res.cookie("token", token,
        {
-      httpOnly: false, 
+      httpOnly: true, 
       secure: true,
       sameSite: "none",
     }
