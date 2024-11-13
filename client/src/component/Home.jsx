@@ -10,7 +10,7 @@ const Home = () => {
   const [user, setUser] = useState([]);
   const navigate= useNavigate()
 
-  const token = Cookies.get("vercel-feature-flags");
+  const token = Cookies.get("token");
 console.log("Token from cookies:", token);
 
     useEffect(()=>{
