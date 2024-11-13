@@ -11,7 +11,7 @@ const Home = () => {
   const navigate= useNavigate()
 
   const token = Cookies.get("token");
-console.log("Token from cookies:", token);
+console.log("Token from cookies:", vercel-feature-flags);
 
     useEffect(()=>{
       if(!Cookies.get("token")){

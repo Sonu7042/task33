@@ -52,6 +52,7 @@ app.post("/register", (req, res) => {
   }
 });
 
+
 app.post("/login", (req, res) => {
   try {
     const user = req.body;
@@ -85,6 +86,7 @@ app.post("/login", (req, res) => {
     });
   }
 });
+
 
 app.get("/", protectRoute, (req, res) => {
   res.send(users);
