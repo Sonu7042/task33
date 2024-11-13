@@ -10,10 +10,12 @@ const app = express();
 
 app.use(express.json());
 
-app.use(cors({
-  origin: "https://task33-ne7m.vercel.app", 
-  credentials: true, 
-}));
+app.use(
+  cors({
+    origin: "http://localhost:5173",
+    credentials: true,
+  })
+);
 
 app.use(cookieParser());
 
@@ -62,12 +64,13 @@ app.post("/login", (req, res) => {
     }
 
     const token = jwt.sign({ user }, secretKey, { expiresIn: "1h" });
-
-    res.cookie("token", token, {
-      httpOnly: true,     
-      secure: true,      
-      sameSite: "none",  
-    });
+    res.cookie("token", token,
+       {
+      httpOnly: false, 
+      secure: true,
+      sameSite: "none",
+    }
+  );
 
     res.status(200).json({
       success: true,

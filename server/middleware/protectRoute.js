@@ -5,15 +5,18 @@ const protectRoute = (req, res, next) => {
   try {
 
     const token = req.cookies.token;
+    console.log(req.cookies.token)
+    
+
     if (!token) {
       throw new Error("Wrong User");
     }
 
     const verifyUser = jwt.verify(token, secretKey);
+    // console.log(verifyUser)
 
     req.user = verifyUser;
     next();
-
   } catch (err) {
     res.status(401).json({
       message: err.message || err,

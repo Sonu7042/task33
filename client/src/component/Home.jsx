@@ -10,18 +10,20 @@ const Home = () => {
   const [user, setUser] = useState([]);
   const navigate= useNavigate()
 
+  const token = Cookies.get("token");
+console.log("Token from cookies:", token);
 
     useEffect(()=>{
       if(!Cookies.get("token")){
         navigate("/login") 
       }
+
       else{
         navigate('/')
       }
     }, [])
 
  
-
     useEffect(() => {
       const fetchData = async () => {
         const response = await axios(`${api}`, {
