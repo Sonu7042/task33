@@ -3,17 +3,18 @@ import axios from 'axios';
 import './App.css'; // Import the CSS file
 
 function App() {
+  let domain = "https://task33-tau.vercel.app"
   const [response, setResponse] = useState(null);
 
   const setCookie = async () => {
-    const res = await axios.get('https://cookie-parser-33-task-backend.vercel.app/set-cookie', {
+    const res = await axios.get(`${domain}/set-cookie`, {
       withCredentials: true
     });
     setResponse(res.data);
   };
 
   const getCookie = async () => {
-    const res = await axios.get('https://cookie-parser-33-task-backend.vercel.app/get-cookie', {
+    const res = await axios.get(`${domain}/get-cookie`, {
       withCredentials: true
     });
     setResponse(res.data);
@@ -21,7 +22,7 @@ function App() {
 
   const getStatusCodeResponse = async (code) => {
     try {
-      const res = await axios.get(`https://cookie-parser-33-task-backend.vercel.app/status/${code}`, {
+      const res = await axios.get(`${domain}/status/${code}`, {
         withCredentials: true
       });
       setResponse(res.data);
